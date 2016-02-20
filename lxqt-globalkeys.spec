@@ -5,12 +5,12 @@
 
 Summary:	lxqt-globalkeys
 Name:		lxqt-globalkeys
-Version:	0.8.0
-Release:	0.2
+Version:	0.10.0
+Release:	1
 License:	GPLv2 and LGPL-2.1+
 Group:		X11/Applications
-Source0:	http://lxqt.org/downloads/lxqt/%{version}/%{name}-%{version}.tar.xz
-# Source0-md5:	884e0a66f978e58fd13401bcacab1dd7
+Source0:	http://downloads.lxqt.org/lxqt/%{version}/%{name}-%{version}.tar.xz
+# Source0-md5:	7657a595119fea4d4d08253b0816b792
 URL:		http://www.lxqt.org/
 BuildRequires:	cmake >= 2.8.3
 BuildRequires:	liblxqt-devel >= 0.8.0
@@ -45,7 +45,7 @@ pisaniu własnych programów wykorzystujących lxqt-globalkeys.
 install -d build
 cd build
 %cmake \
-    -DUSE_QT5=ON \
+	-DUSE_QT5=ON \
 	../
 
 %{__make}
@@ -56,61 +56,54 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%find_lang %{name} --all-name --with-qm
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
-%files
+%files -f %{name}.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lxqt-config-globalkeyshortcuts
 
 %attr(755,root,root) %{_bindir}/lxqt-globalkeysd
-%ghost %{_libdir}/liblxqt-globalkeys-ui-qt5.so.0
-%attr(755,root,root) %{_libdir}/liblxqt-globalkeys-ui-qt5.so.*.*.*
-%ghost %{_libdir}/liblxqt-globalkeys-qt5.so.0
-%attr(755,root,root) %{_libdir}/liblxqt-globalkeys-qt5.so.*.*.*
 %{_desktopdir}/lxqt-config-globalkeyshortcuts.desktop
 
-%dir %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts
-%lang(ar) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_ar.qm
-%lang(cs) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_cs.qm
-%lang(cs_CZ) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_cs_CZ.qm
-%lang(da) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_da_DK.qm
-%lang(de) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_de.qm
-%lang(de_DE) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_de_DE.qm
-%lang(el) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_el_GR.qm
-%lang(eo) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_eo.qm
-%lang(es) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_es.qm
-%lang(es_VE) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_es_VE.qm
-%lang(eu) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_eu.qm
-%lang(fi) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_fi.qm
-%lang(fr) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_fr_FR.qm
-%lang(it) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_it_IT.qm
-%lang(ja) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_ja.qm
-%lang(lt) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_lt.qm
-%lang(nl) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_nl.qm
-%lang(pl) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_pl_PL.qm
-%lang(pt) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_pt.qm
-%lang(pt_BR) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_pt_BR.qm
-%lang(ro) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_ro_RO.qm
-%lang(ru) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_ru.qm
-%lang(ru_RU) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_ru_RU.qm
-%lang(sl) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_sl.qm
-%lang(th) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_th_TH.qm
-%lang(tr) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_tr.qm
-%lang(uk) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_uk.qm
-%lang(zh_CN) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_zh_CN.qm
-%lang(zh_TW) %{_datadir}/lxqt-qt5/translations/lxqt-config-globalkeyshortcuts/lxqt-config-globalkeyshortcuts_zh_TW.qm
+%dir %{_datadir}/lxqt/translations/lxqt-config-globalkeyshortcuts
+%attr(755,root,root) %ghost %{_libdir}/liblxqt-globalkeys-ui.so.0
+%attr(755,root,root) %{_libdir}/liblxqt-globalkeys-ui.so.0.10.0
+%attr(755,root,root) %ghost %{_libdir}/liblxqt-globalkeys.so.0
+%attr(755,root,root) %{_libdir}/liblxqt-globalkeys.so.0.10.0
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/liblxqt-globalkeys-ui-qt5.so
-%{_libdir}/liblxqt-globalkeys-qt5.so
-%{_datadir}/cmake/lxqt-globalkeys-qt5
-%{_datadir}/cmake/lxqt-globalkeys-ui-qt5
-%{_includedir}/lxqt-globalkeys-qt5
-%{_includedir}/lxqt-globalkeys-ui-qt5
-%{_pkgconfigdir}/lxqt-globalkeys-ui-qt5.pc
-%{_pkgconfigdir}/lxqt-globalkeys-qt5.pc
+%dir %{_includedir}/lxqt-globalkeys-ui
+%dir %{_includedir}/lxqt-globalkeys-ui/LXQtGlobalKeysUi
+%{_includedir}/lxqt-globalkeys-ui/LXQtGlobalKeysUi/ShortcutSelector
+%{_includedir}/lxqt-globalkeys-ui/shortcut_selector.h
+%{_includedir}/lxqt-globalkeys-ui/shortcutselector.h
+%dir %{_includedir}/lxqt-globalkeys
+%dir %{_includedir}/lxqt-globalkeys/LXQtGlobalKeys
+%{_includedir}/lxqt-globalkeys/LXQtGlobalKeys/Action
+%{_includedir}/lxqt-globalkeys/LXQtGlobalKeys/Client
+%{_includedir}/lxqt-globalkeys/LXQtGlobalKeys/LXQtGlobalKeys
+%{_includedir}/lxqt-globalkeys/action.h
+%{_includedir}/lxqt-globalkeys/client.h
+%{_includedir}/lxqt-globalkeys/lxqt-globalkeys.h
+%{_includedir}/lxqt-globalkeys/lxqtglobalkeys.h
+%{_libdir}/liblxqt-globalkeys-ui.so
+%{_libdir}/liblxqt-globalkeys.so
+%{_pkgconfigdir}/lxqt-globalkeys-ui.pc
+%{_pkgconfigdir}/lxqt-globalkeys.pc
+%dir %{_datadir}/cmake/lxqt-globalkeys-ui
+%{_datadir}/cmake/lxqt-globalkeys-ui/lxqt-globalkeys-ui-config-version.cmake
+%{_datadir}/cmake/lxqt-globalkeys-ui/lxqt-globalkeys-ui-config.cmake
+%{_datadir}/cmake/lxqt-globalkeys-ui/lxqt-globalkeys-ui-targets-pld.cmake
+%{_datadir}/cmake/lxqt-globalkeys-ui/lxqt-globalkeys-ui-targets.cmake
+%dir %{_datadir}/cmake/lxqt-globalkeys
+%{_datadir}/cmake/lxqt-globalkeys/lxqt-globalkeys-config-version.cmake
+%{_datadir}/cmake/lxqt-globalkeys/lxqt-globalkeys-config.cmake
+%{_datadir}/cmake/lxqt-globalkeys/lxqt-globalkeys-targets-pld.cmake
+%{_datadir}/cmake/lxqt-globalkeys/lxqt-globalkeys-targets.cmake
